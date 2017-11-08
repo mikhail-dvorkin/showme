@@ -3,9 +3,7 @@ Minimalistic library to create SVG files in Java
 
 # To make own visualizer
 
-In showme.framwork.ShowMe change template() to yourClassName().
-
-In showme.visualizers rename template to yourClassName and write your code there.
+Write your code in showme.visualizers.Viz.
 
 Run build.cmd/sh.
 
