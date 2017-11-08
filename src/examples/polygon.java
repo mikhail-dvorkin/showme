@@ -1,4 +1,4 @@
-package samples;
+package examples;
 
 import java.io.*;
 import java.util.*;

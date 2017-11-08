@@ -1,11 +1,11 @@
-package samples;
+package examples;
+
 import java.io.*;
 import java.util.*;
 
 import showme.figure.*;
 import showme.framework.Tools;
 import showme.framework.Visualizer;
-
 
 public class trees implements Visualizer {
 	@Override
