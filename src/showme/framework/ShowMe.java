@@ -14,7 +14,7 @@ public class ShowMe {
 	public static double border = 5;
 	public static String gallery = null;
 	public static boolean reverse = false;
-	private static Visualizer vis = new template(); // Put your visualizer here
+	private static Visualizer vis = new Viz(); // Put your visualizer here
 
 	public static void main(String[] args) {
 		Locale.setDefault(Locale.US);
