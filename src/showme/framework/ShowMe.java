@@ -2,6 +2,7 @@ package showme.framework;
 
 import java.io.*;
 import java.util.*;
+import java.lang.reflect.Constructor;
 
 import showme.figure.*;
 import showme.ichthyop.util.MetaFilenameFilter;
@@ -20,6 +21,7 @@ public class ShowMe {
 		Locale.setDefault(Locale.US);
 		List<String> masks = new ArrayList<String>();
 		String dir = null;
+        String visualizerName = null;
 		for (String arg : args) {
 			if (arg.toLowerCase().startsWith("--size=")) {
 				try {
@@ -33,6 +35,14 @@ public class ShowMe {
 					throw new IllegalArgumentException("Can't parse argument: " + arg, e);
 				}
 			}
+            if (arg.toLowerCase().startsWith("--visualizer=")) {
+                try {
+                    visualizerName = arg.substring("--visualizer=".length());
+                    continue;
+                } catch (Exception e) {
+                    throw new IllegalArgumentException("Can't parse argument: " + arg, e);
+                }
+            }
 			if (arg.toLowerCase().startsWith("--border=")) {
 				try {
 					border = Double.parseDouble(arg.substring("--border=".length()));
@@ -64,6 +74,15 @@ public class ShowMe {
 			}
 			masks.add(arg);
 		}
+        if (visualizerName != null) {
+            try {
+                Class<?> visualizerClass = Class.forName(visualizerName);
+                Constructor<?> ctor = visualizerClass.getConstructor();
+                vis = (Visualizer)ctor.newInstance();
+            } catch (Exception e) {
+			    throw new IllegalArgumentException("Incorrect visualizer: " + visualizerName, e);
+            }
+        }
 		if (dir == null || masks.isEmpty()) {
 			String run = "java -jar showme.jar";
 			System.out.println("Visulizer \"" + vis.getClass().getSimpleName() + "\", ShowMe 1.0 by Mikhail Dvorkin, mikhail.dvorkin@gmail.com");
